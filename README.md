@@ -36,7 +36,6 @@ Install frontend packages
 ```sh
 cd frontend && npm i
 ```
-
+## About
 ![Xoja Ahmad Yassaviy Maqbarasi](./maqbara.png)
-
-About Xoja Ahmad Yassaviy
+[Xoja Ahmad Yassaviy](https://en.wikipedia.org/wiki/Ahmad_Yasawi)
