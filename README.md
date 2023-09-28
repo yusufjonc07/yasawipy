@@ -2,7 +2,7 @@
 
 A demo application to illustrate how Yasawi Admin works.
 
-![Xoja Ahmad Yassaviy Maqbarasi](./maqbara.png)
+![Repasotory is in development yet](./indevelopment.gif)
 
 ## Installation
 
@@ -37,3 +37,4 @@ Install frontend packages
 cd frontend && npm i
 ```
 
+![Xoja Ahmad Yassaviy Maqbarasi](./maqbara.png)
