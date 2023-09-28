@@ -38,3 +38,5 @@ cd frontend && npm i
 ```
 
 ![Xoja Ahmad Yassaviy Maqbarasi](./maqbara.png)
+
+About Xoja Ahmad Yassaviy
