@@ -25,13 +25,13 @@ source venv/bin/activate
 ```
 
 
-Install requirements
+Install backend requirements
 
 ```sh
 pip install -r requirements.txt
 ```
 
-Install fronted packages
+Install frontend packages
 
 ```sh
 cd frontend && npm i
