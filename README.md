@@ -1,3 +1,3 @@
 # yasawipy
 
-![alt text](image ./maqbara.png)
+![Xoja Ahmad Yassaviy Maqbarasi](./maqbara.png)
