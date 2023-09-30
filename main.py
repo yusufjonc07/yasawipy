@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from app.routers import routes
-from app.generate import make_sidebar
+from app.generate import generate_frontend
 import subprocess
 
 templates = Jinja2Templates(directory="public")
@@ -22,6 +22,15 @@ async def my_middleware(request: Request, call_next) -> Response:
     else:
         return templates.TemplateResponse("index.html", {"request": request})
     
+
+@app.on_event("startup")
+def generate_app():
+    generate_frontend(app)
+  
+    res = subprocess.run("cd frontend && npm run build", shell=True, capture_output=True)
+    print(res.stdout.decode())
+        
+    
 @app.get("/api/sayhi")
 def read_main(request: Request):
     return {"message": "Hello World", "root_path": request.scope.get("root_path")}
@@ -29,11 +38,3 @@ def read_main(request: Request):
 app.include_router(routes)
 
 
-make_sidebar()
-
-def build_vue():
-    res = subprocess.run("cd fronted && npm run build", shell=True, capture_output=True)
-
-    print(res.stdout.decode())
-
-    

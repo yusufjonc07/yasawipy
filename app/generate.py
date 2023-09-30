@@ -3,7 +3,12 @@ import glob
 from app.resource import Resource
 import json
 
-def make_sidebar():
+
+
+
+
+
+def make_sidebar(app):
 
     routers = glob.glob("app/resources/*.py")
 
@@ -43,11 +48,17 @@ def make_sidebar():
             "items": nGroupItems
         })
 
-    context = {
+    return {
         "groups": nGroups
+    }
+
+
+def generate_frontend(app):
+    sidebar = make_sidebar(app)
+
+    context = {
+        "sidebar": sidebar
     }
 
     with open("./frontend/src/components/data/navigation.json", "w") as f:
         f.write(json.dumps(context))
-
-    print(nGroups)

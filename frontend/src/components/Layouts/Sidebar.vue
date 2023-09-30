@@ -113,7 +113,7 @@ export default {
   },
   data() {
     return {
-      groups: Navigations.groups
+      groups: Navigations.sidebar.groups
     }
   },
 
