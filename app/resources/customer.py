@@ -2,12 +2,13 @@ from ..resource import Resource
 from ..models.user import User
 from ..schemas.user import NewUser
 
-product_router = Resource(
-    name='product',
+customer_router = Resource(
+    name='customer',
     modelClass=User,
     createForm=NewUser,
-    pluralLabel='Mahsulotlar',
+    pluralLabel='Mijozlar',
     navigationGroup='Boshqaruv',
-    label='Mahsulot',
-    tags=['Mahsulotlar']
+    label='Mijoz',
+    navigationIcon='shopping-cart',
+    tags=['Mijozlar']
 )

@@ -63,7 +63,10 @@
                   :to="item.to"
                   class="fi-sidebar-item-button relative flex items-center justify-center gap-x-3 rounded-lg px-2 py-2 text-sm outline-none transition duration-75 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-white/5 dark:focus:bg-white/5"
                 >
-                  <component :is="item.icon" class="w-5"></component>
+                  <component
+                    class="w-5"
+                    :is="this.$icon['outline'][getIcon(item.icon)]"
+                  ></component>
                   <span
                     class="fi-sidebar-item-label flex-1 truncate text-gray-700 dark:text-gray-200 font-medium"
                   >
@@ -91,7 +94,6 @@
                       <!-- __ENDBLOCK__ -->
                     </div>
                   </span>
-
                 </router-link>
               </li>
             </ul>
@@ -103,7 +105,7 @@
 </template>
 <script>
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
-import { HomeIcon } from '@heroicons/vue/24/outline'
+import Navigations from '../data/navigation.json'
 
 export default {
   name: 'side-bar',
@@ -112,46 +114,24 @@ export default {
   },
   data() {
     return {
-      groups: [
-        {
-          label: 'Shop',
-          icon: '',
-          url: null,
-          items: [
-            {
-              label: 'Products',
-              to: '/products',
-              icon: HomeIcon,
-              nCount: 13
-            }
-          ]
-        },
-        // {
-        //   label: null,
-        //   icon: '',
-        //   url: null,
-        //   items: [
-        //     {
-        //       label: 'Hodimlar',
-        //       to: '/employees',
-        //       icon: UsersIcon,
-        //       nCount: 0
-        //     },
-        //     {
-        //       label: 'Mijozlar',
-        //       to: '/customers',
-        //       icon: UsersIcon,
-        //       nCount: 10
-        //     },
-        //     {
-        //       label: 'Buyurtmalar',
-        //       to: '/orders',
-        //       icon: DocumentTextIcon,
-        //       nCount: 4
-        //     },
-        //   ]
-        // }
-      ]
+      groups: Navigations.groups
+    }
+  },
+
+  methods: {
+    capitalized(name) {
+      const capitalizedFirst = name[0].toUpperCase()
+      const rest = name.slice(1)
+
+      return capitalizedFirst + rest
+    },
+    getIcon(name) {
+      let cons = []
+
+      name.split('-').forEach((element) => {
+        cons.push(this.capitalized(element))
+      })
+      return cons.join('') + 'Icon'
     }
   }
 }

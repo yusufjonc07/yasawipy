@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, Session, declarative_base
 from fastapi import Depends
 
-SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://"
+SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://root:root@localhost:3306/yasawi-demo"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL 

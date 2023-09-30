@@ -1,0 +1,27 @@
+{
+    "groups": [
+        {
+            "label": "Boshqaruv",
+            "items": [
+                {
+                    "label": "Hodimlar",
+                    "to": "/user",
+                    "icon": "folder",
+                    "nCount": 0
+                },
+                {
+                    "label": "Mahsulotlar",
+                    "to": "/product",
+                    "icon": "folder",
+                    "nCount": 0
+                },
+                {
+                    "label": "Mijozlar",
+                    "to": "/customer",
+                    "icon": "shopping-cart",
+                    "nCount": 0
+                }
+            ]
+        }
+    ]
+}

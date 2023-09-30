@@ -1,5 +1,5 @@
 from pydantic import BaseModel
 
 
-class NewProduct(BaseModel):
+class NewUser(BaseModel):
     name: str

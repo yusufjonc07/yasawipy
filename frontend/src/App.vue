@@ -3,6 +3,7 @@ import { RouterView } from 'vue-router'
 import Sidebar from './components/Layouts/Sidebar.vue'
 import Backdrop from './components/Layouts/Backdrop.vue'
 import Navbar from './components/Layouts/Navbar.vue'
+
 </script>
 
 <template>

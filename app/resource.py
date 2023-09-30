@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from app.db import Base, ActiveSession
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from pydantic import BaseModel
 from typing import Optional
 
@@ -15,9 +16,20 @@ class Resource(APIRouter):
         editForm: Optional[BaseModel] = None,
         label: str = '', 
         pluralLabel: str = '',
+        navigationIcon: str = 'folder',
+        navigationGroup: str = '',
         tags=[]
     ):
         
+        self.name = name
+        self.modelClass = modelClass
+        self.createForm = createForm
+        self.editForm = editForm
+        self.label = label
+        self.pluralLabel = pluralLabel
+        self.navigationIcon = navigationIcon
+        self.navigationGroup = navigationGroup
+
         super().__init__(tags=tags, prefix=f"/{name}")
 
         if not editForm:
@@ -41,7 +53,7 @@ class Resource(APIRouter):
                 return HTTPException(400, 'Something went wrong')
             
         @self.get("/{id}")
-        async def get_one(id: int, form_data: editForm, db: Session = ActiveSession):
+        async def get_one(id: int, db: Session = ActiveSession):
 
             try:
 
@@ -52,8 +64,9 @@ class Resource(APIRouter):
 
                 return record
 
-            except Exception:
-                return HTTPException(400, 'Something went wrong')
+            except IntegrityError as e:
+                return HTTPException(400, e.args)
+           
             
         @self.put("/update/{id}")
         async def update_one(id: int, form_data: editForm, db: Session = ActiveSession):
@@ -70,8 +83,10 @@ class Resource(APIRouter):
 
                 return HTTPException(200, 'Updated successfully')
 
-            except Exception:
-                return HTTPException(400, 'Something went wrong')
+            except IntegrityError as e:
+                return HTTPException(400, e.args)
+            except Exception as e:
+                return HTTPException(400, e.args)
             
         @self.delete("/delete/{id}")
         async def delete_one(id: int,  db: Session = ActiveSession):

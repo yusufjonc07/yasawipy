@@ -1,10 +1,13 @@
 from ..resource import Resource
-from ..models.product import Product
-from ..schemas.product import NewProduct
+from ..models.user import User
+from ..schemas.user import NewUser
 
 user_router = Resource(
     name='user',
-    modelClass=Product,
-    createForm=NewProduct,
+    modelClass=User,
+    createForm=NewUser,
+    pluralLabel='Hodimlar',
+    label='Hodim',
+    navigationGroup='Boshqaruv',
     tags=['Hodimlar']
 )
