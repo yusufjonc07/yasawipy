@@ -3,14 +3,17 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from app.routers import routes
-from app.generate import generate_frontend
+from app.generate.main import generate_frontend
 import subprocess
+from app.utils.helpers import delete_files
 
 templates = Jinja2Templates(directory="public")
 
-app = FastAPI()
+app = FastAPI(
+    title="TELEGRAM PLUS",
+)
 
-app.mount("/assets", StaticFiles(directory="./public/assets"), name="assets")
+
 
 @app.middleware("http")
 async def my_middleware(request: Request, call_next) -> Response:
@@ -24,11 +27,18 @@ async def my_middleware(request: Request, call_next) -> Response:
     
 
 @app.on_event("startup")
-def generate_app():
+async def generate_app():
     generate_frontend(app)
-  
     res = subprocess.run("cd frontend && npm run build", shell=True, capture_output=True)
     print(res.stdout.decode())
+
+    app.mount("/assets", StaticFiles(directory="./public/assets"), name="assets")
+
+# @app.on_event("shutdown")
+# async def drop_all():
+#     delete_files("./public/assets", ['js', 'css'])
+#     delete_files("./frontend/src/router", ['js'])
+#     print("Fayllar o'chirildi!")
         
     
 @app.get("/api/sayhi")

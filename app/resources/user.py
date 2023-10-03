@@ -11,3 +11,5 @@ user_router = Resource(
     navigationGroup='Boshqaruv',
     tags=['Hodimlar']
 )
+
+

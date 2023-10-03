@@ -1,12 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ProductView from "../views/ProductView.vue"
-// import HomeView from '../views/HomeView.vue'
+import ListUser from "../views/UserView/ListUser.vue"
+import ListProduct from "../views/ProductView/ListProduct.vue"
+import ListCustomer from "../views/CustomerView/ListCustomer.vue"
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/products:', component: ProductView },
+    {
+      path: '/user:',
+      component: ListUser,
+    },
+    {
+      path: '/product:',
+      component: ListProduct,
+    },
+    {
+      path: '/customer:',
+      component: ListCustomer,
+    },
   ]
 })
 
 export default router
+        

@@ -229,7 +229,6 @@
           <div class="ms-auto flex items-center gap-x-4">
             <!-- __BLOCK__ -->
             <div x-id="['input']" class="fi-ta-search-field">
-              <label x-bind:for="$id('input')" class="sr-only" for="input-1"> Search </label>
               <YSearchInput placeholder="Qidirish" v-model="search" />
             </div>
             <!-- __ENDBLOCK__ -->

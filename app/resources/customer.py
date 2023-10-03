@@ -7,8 +7,9 @@ customer_router = Resource(
     modelClass=User,
     createForm=NewUser,
     pluralLabel='Mijozlar',
-    navigationGroup='Savdo',
+    navigationGroup='Savdo bo`limi',
     label='Mijoz',
-    navigationIcon='shopping-cart',
-    tags=['Mijozlar']
+    navigationIcon='building-library',
+    tags=['Mijozlar'],
+    simple=True,
 )

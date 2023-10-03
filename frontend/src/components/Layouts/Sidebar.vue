@@ -16,7 +16,7 @@
           <div
             class="fi-logo text-xl font-bold leading-5 tracking-tight text-gray-950 dark:text-white"
           >
-            Yasawi Demo
+            {{ app_name }}
           </div>
           <!-- __ENDBLOCK__ -->
         </a>
@@ -113,7 +113,8 @@ export default {
   },
   data() {
     return {
-      groups: Navigations.sidebar.groups
+      groups: Navigations.sidebar.groups,
+      app_name: Navigations.app_name
     }
   },
 

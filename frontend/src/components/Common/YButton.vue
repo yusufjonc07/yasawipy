@@ -2,12 +2,16 @@
   <button
     v-if="tag == 'button'"
     :title="tooltip"
-    :class="buttonClasses"
-    :style="buttonStyles"
+    v-bind:class="buttonClasses"
     :disabled="disabled"
     :type="type"
   >
-    <component :is="this.$icon[iconType][this.iconComonent]" :class="iconClasses"></component>
+    <img
+      v-if="isLoading"
+      src="../../assets/images/loading.svg"
+      class="animate-spin fi-input-wrp-icon h-5 w-5"
+    />
+    <component v-else :is="this.$icon[iconType][this.iconComonent]" :class="iconClasses"></component>
     <slot></slot>
   </button>
 </template>
@@ -25,6 +29,10 @@ export default {
     color: {
       type: String,
       default: 'primary'
+    },
+    urlTo: {
+      type: String,
+      default: '--'
     },
     disabled: {
       type: Boolean,
@@ -64,12 +72,13 @@ export default {
       type: String,
       default: 'button'
     },
+    isLoading: Boolean,
     tooltip: String
   },
   data() {
     return {
-      buttonClasses: null,
       buttonStyles: null,
+      buttonClasses: null,
       iconClasses: null,
       labelClasses: null,
       iconComonent: null,
@@ -85,6 +94,8 @@ export default {
     })
 
     this.iconComonent = cons.join('') + 'Icon'
+
+    this.buttonStyles = get_color_css_variables(this.color, [400, 500, 600])
 
     this.buttonClasses = [
       `fi-btn fi-btn-size-${this.size} relative grid-flow-col items-center justify-center font-semibold outline-none transition duration-75 focus:ring-2 fi-btn-color-${this.color}`,
@@ -110,7 +121,7 @@ export default {
             'fi-btn-outlined ring-1',
             this.color == 'gray'
               ? 'text-gray-950 ring-gray-300 hover:bg-gray-400/10 focus:ring-gray-400/40 dark:text-white dark:ring-gray-700'
-              : 'text-custom-600 ring-custom-600 hover:bg-custom-400/10 dark:text-custom-400 dark:ring-custom-500'
+              : `text-custom-600 ring-${this.color}-600 hover:bg-${this.color}-400/10 dark:text-custom-400 dark:ring-${this.color}-500`
           ].join(' ')
         : [
             !this.grouped ? 'shadow-sm' : '',
@@ -120,13 +131,13 @@ export default {
                   !this.grouped ? 'ring-1 ring-gray-950/10 dark:ring-white/20' : ''
                 ].join(' ')
               : [
-                  'bg-custom-600 text-white hover:bg-custom-500 dark:bg-custom-500 dark:hover:bg-custom-400',
-                  !this.grouped ? 'focus:ring-custom-500/50 dark:focus:ring-custom-400/50' : ''
+                  `bg-${this.color}-600 text-white hover:bg-${this.color}-500 dark:bg-${this.color}-500 dark:hover:bg-${this.color}-400`,
+                  !this.grouped
+                    ? `focus:ring-${this.color}-500/50 dark:focus:ring-${this.color}-400/50`
+                    : ''
                 ].join(' ')
           ].join(' ')
     ].join(' ')
-
-    this.buttonStyles = get_color_css_variables(this.color, [400, 500, 600])
 
     let iconSize = ['xs', 'sm'].includes(this.size) ? 'sm' : 'md'
 

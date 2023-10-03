@@ -13,8 +13,11 @@
     </div>
 
     <div class="fi-ac gap-3 flex flex-wrap items-center justify-start shrink-0 sm:mt-7">
-      <YButton tooltip="Kallenga" color="danger" icon="user" class="bg-danger-600">
-        <span class="fi-btn-label"> Yangi qo'shish </span>
+      <YButton :isLoading="false" v-if="simpleResouce==1" :tooltip="`Yangi ${label} qo'shish`" color="primary" icon="plus">
+        <span class="fi-btn-label"> Yangi {{ label }} </span>
+      </YButton>
+      <YButton v-if="simpleResouce==0" tag="a" urlTo="/create" :tooltip="`Yangi ${label} qo'shish`" color="danger" icon="plus">
+        <span class="fi-btn-label"> Yangi {{ label }} </span>
       </YButton>
     </div>
   </header>
@@ -23,29 +26,19 @@
 import { YBreadcumb, YButton } from '../Common/Components.vue'
 export default {
   name: 'page-header',
-  data() {
-    return {
-      title: 'Mahsulotlar',
-      breadcumbs: [
-        {
-          label: 'Mahsulotlar',
-          to: '/products'
-        },
-        {
-          label: 'Braklar',
-          to: '/products/broken'
-        },
-        {
-          label: "Ro'yxat",
-          to: '#'
-        }
-      ]
-    }
+  props: {
+    title: String,
+    label: String,
+    simpleResouce: Number,
+    breadcumbs: Array
   },
   methods: {
     somefunc() {
       console.log('saom')
     }
+  },
+  mounted(){
+    console.log(this.simpleResouce);
   },
   components: { YBreadcumb, YButton }
 }

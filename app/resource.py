@@ -17,16 +17,24 @@ class Resource(APIRouter):
         label: str = '', 
         pluralLabel: str = '',
         navigationIcon: str = 'folder',
+        activeNavigationIcon: str = '',
         navigationGroup: str = '',
+        simple: bool = False,
         tags=[]
     ):
         
+        if not activeNavigationIcon:
+            activeNavigationIcon = navigationIcon
+
+        
         self.name = name
+        self.simple = simple
         self.modelClass = modelClass
         self.createForm = createForm
         self.editForm = editForm
         self.label = label
         self.pluralLabel = pluralLabel
+        self.activeNavigationIcon = activeNavigationIcon    
         self.navigationIcon = navigationIcon
         self.navigationGroup = navigationGroup
 
